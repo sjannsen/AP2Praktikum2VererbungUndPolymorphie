@@ -14,7 +14,7 @@ open class Product(val name: String, val basePrice: Double, val margin: Int) {
     }
 
     fun meanScore(): Double {
-        var meanScore: Double = 0.0
+        var meanScore = 0.0
         for (review in reviews)
             meanScore += review.score()
         return meanScore / reviews.count()
@@ -28,15 +28,15 @@ open class DiscountedProduct(name: String, basePrice: Double, margin: Int, val d
 }
 
 enum class Quality {
-    GOOD { override fun quality() = "Gut"},
-    USED { override fun quality() = "Gebraucht"},
-    BAD { override fun quality() = "Schlecht"};
-    abstract fun quality(): String
+    GOOD { override fun toString() = "Gut"},
+    USED { override fun toString() = "Gebraucht"},
+    BAD { override fun toString() = "Schlecht"};
+    abstract override fun toString(): String
 }
 
 class RefurbishedProduct(name: String, basePrice: Double, margin: Int, discount: Int, val quality: Quality) :
     DiscountedProduct(name, basePrice, margin, discount) {
-    override fun toString(): String = super.toString() + " (${quality.quality()})"
+    override fun toString(): String = super.toString() + " (${this.quality})"
 }
 
 class LimitedProduct(name: String, basePrice: Double, margin: Int, val totalNumberOfProducts: Int) :
